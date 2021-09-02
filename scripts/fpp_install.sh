@@ -1,7 +1,8 @@
 #!/bin/bash
 
+/usr/bin/php /home/fpp/media/plugins/remote-falcon/writeDefaultConfig.php &
+
 # Mark to reboot
-. /opt/fpp/scripts/common
-setSetting restartFlag 1
+sed -i -e "s/^restartFlag .*/restartFlag = 1/" ${FPPHOME}/media/settings
 
 #fpp_install

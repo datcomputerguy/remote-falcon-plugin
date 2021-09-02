@@ -1,0 +1,72 @@
+{
+  "settingGroups": {
+    "remote-falcon": {
+      "description": "Remote Falcon Settings",
+      "settings": [
+          "remoteToken",
+          "remotePlaylist",
+          "requestFetchTime",
+          "interruptSchedule",
+          "autoRestartPlugin",
+          "pluginEnabled",
+          "pluginRestarting"
+      ]
+    }
+  },
+  "settings": {
+    "remoteToken": {
+      "name": "remoteToken",
+      "default": "",
+      "type": "text",
+      "reboot": 0,
+      "restart": 0,
+      "reloadUI": 0
+    },
+    "remotePlaylist": {
+      "name": "remotePlaylist",
+      "type": "select",
+      "optionsURL": "api/playlists",
+      "reboot": 0,
+      "restart": 0,
+      "reloadUI": 1
+    },
+    "requestFetchTime": {
+      "name": "requestFetchTime",
+      "default": 10,
+      "type": "number",
+      "reboot": 0,
+      "restart": 0,
+      "reloadUI": 0
+    },
+    "interruptSchedule": {
+      "name": "interruptSchedule",
+      "type": "checkbox",
+      "reboot": 0,
+      "restart": 0,
+      "reloadUI": 0
+    },
+    "autoRestartPlugin": {
+      "name": "autoRestartPlugin",
+      "type": "checkbox",
+      "reboot": 0,
+      "restart": 0,
+      "reloadUI": 0
+    },
+    "pluginEnabled": {
+      "name": "pluginEnabled",
+      "type": "text",
+      "default": "true",
+      "reboot": 0,
+      "restart": 0,
+      "reloadUI": 0
+    },
+    "pluginRestarting": {
+      "name": "pluginRestarting",
+      "type": "text",
+      "default": "false",
+      "reboot": 0,
+      "restart": 0,
+      "reloadUI": 0
+    }
+  }
+}

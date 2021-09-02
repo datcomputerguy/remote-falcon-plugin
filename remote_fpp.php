@@ -1,17 +1,15 @@
 <?php
 include_once "/opt/fpp/www/common.php";
 include_once "/home/fpp/media/plugins/remote-falcon/baseurl.php";
+include_once "/home/fpp/media/plugins/remote-falcon/version.php";
 $baseUrl = getBaseUrl();
+$pluginVersion = getVersion();
 $pluginName = basename(dirname(__FILE__));
 $pluginPath = $settings['pluginDirectory']."/".$pluginName."/"; 
 $logFile = $settings['logDirectory']."/".$pluginName.".log";
 $pluginConfigFile = $settings['configDirectory'] . "/plugin." .$pluginName;
 $pluginSettings = parse_ini_file($pluginConfigFile);
 
-WriteSettingToFile("remote_fpp_enabled",urlencode("true"),$pluginName);
-WriteSettingToFile("remote_fpp_restarting",urlencode("false"),$pluginName);
-
-$pluginVersion = urldecode($pluginSettings['pluginVersion']);
 echo "Starting Remote Falcon Plugin v" . $pluginVersion . "\n";
 logEntry("Starting Remote Falcon Plugin v" . $pluginVersion);
 
@@ -29,7 +27,7 @@ logEntry("Remote Playlist: ".$remotePlaylist);
 $remotePreferences = remotePreferences($remoteToken);
 $viewerControlMode = $remotePreferences->viewerControlMode;
 logEntry("Viewer Control Mode: " . $viewerControlMode);
-$interruptSchedule = urldecode($pluginSettings['interrupt_schedule_enabled']);
+$interruptSchedule = urldecode($pluginSettings['interruptSchedule']);
 logEntry("Interrupt Schedule: " . $interruptSchedule);
 $interruptSchedule = $interruptSchedule == "true" ? true : false;
 $requestFetchTime = intVal(urldecode($pluginSettings['requestFetchTime']));
@@ -37,14 +35,14 @@ logEntry("Request Fetch Time: " . $requestFetchTime);
 
 while(true) {
   $pluginSettings = parse_ini_file($pluginConfigFile);
-  $remoteFppEnabled = urldecode($pluginSettings['remote_fpp_enabled']);
+  $remoteFppEnabled = urldecode($pluginSettings['pluginEnabled']);
   $remoteFppEnabled = $remoteFppEnabled == "true" ? true : false;
-  $remoteFppRestarting = urldecode($pluginSettings['remote_fpp_restarting']);
+  $remoteFppRestarting = urldecode($pluginSettings['pluginRestarting']);
   $remoteFppRestarting = $remoteFppRestarting == "true" ? true : false;
 
   if($remoteFppRestarting == 1) {
-    WriteSettingToFile("remote_fpp_enabled",urlencode("true"),$pluginName);
-    WriteSettingToFile("remote_fpp_restarting",urlencode("false"),$pluginName);
+    WriteSettingToFile("pluginEnabled",urlencode("true"),$pluginName);
+    WriteSettingToFile("pluginRestarting",urlencode("false"),$pluginName);
 
     echo "Restarting Remote Falcon Plugin v" . $pluginVersion . "\n";
     logEntry("Restarting Remote Falcon Plugin v" . $pluginVersion);
@@ -54,7 +52,7 @@ while(true) {
     $remotePreferences = remotePreferences($remoteToken);
     $viewerControlMode = $remotePreferences->viewerControlMode;
     logEntry("Viewer Control Mode: " . $viewerControlMode);
-    $interruptSchedule = urldecode($pluginSettings['interrupt_schedule_enabled']);
+    $interruptSchedule = urldecode($pluginSettings['interruptSchedule']);
     logEntry("Interrupt Schedule: " . $interruptSchedule);
     $interruptSchedule = $interruptSchedule == "true" ? true : false;
     $requestFetchTime = intVal(urldecode($pluginSettings['requestFetchTime']));
