@@ -90,6 +90,7 @@ if (isset($_POST['updateRemotePlaylist'])) {
       $mainPlaylist = $response['mainPlaylist'];
       $index = 1;
       foreach($mainPlaylist as $item) {
+	$index++;
         if($item['type'] == 'both' || $item['type'] == 'sequence') {
           $playlist = null;
           $playlist->playlistName = pathinfo($item['sequenceName'], PATHINFO_FILENAME);
@@ -103,7 +104,7 @@ if (isset($_POST['updateRemotePlaylist'])) {
           $playlist->playlistIndex = $index;
           array_push($playlists, $playlist);
         }
-        $index++;
+        
       }
       $url = $baseUrl . "/remotefalcon/api/syncPlaylists";
       $data = array(
